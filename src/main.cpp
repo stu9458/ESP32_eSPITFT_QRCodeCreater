@@ -16,10 +16,9 @@ bool tft_output(int16_t x, int16_t y, uint16_t w, uint16_t h, uint16_t* bitmap)
 
 void setup() {
     tft.begin(); /* TFT init */
-    tft.invertDisplay(1);//反转所有显示颜色：1反转，0正常
+    tft.invertDisplay(1);
     tft.setRotation(0);
-    tft.fillScreen(TFT_BLACK);
-    tft.setTextColor(TFT_BLACK, 0x0000);
+    tft.fillScreen(TFT_WHITE);
 
     // Start time
     uint32_t dt = millis();
@@ -31,7 +30,7 @@ void setup() {
     int shift_y = 60;
     QRCode qrcode;
     uint8_t qrcodeData[qrcode_getBufferSize(version)];
-    qrcode_initText(&qrcode, qrcodeData, version, ECC_LOW, "HELLO WORLD");
+    qrcode_initText(&qrcode, qrcodeData, version, ECC_LOW, "https://530520.com.tw/");
   
     // Delta time
     dt = millis() - dt;
