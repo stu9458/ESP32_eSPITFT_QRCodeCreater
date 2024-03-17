@@ -24,13 +24,13 @@ void setup() {
     uint32_t dt = millis();
   
     // Create the QR code
-    int version = 1;
+    int version = 5;
     int scale = 6;
-    int shift_x = 60;
-    int shift_y = 60;
+    int shift_x = 5;
+    int shift_y = 5;
     QRCode qrcode;
     uint8_t qrcodeData[qrcode_getBufferSize(version)];
-    qrcode_initText(&qrcode, qrcodeData, version, ECC_LOW, "https://530520.com.tw/");
+    qrcode_initText(&qrcode, qrcodeData, version, ECC_MEDIUM, "https://www.topigeon.com.tw/");
   
     // Delta time
     dt = millis() - dt;
