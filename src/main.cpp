@@ -2,6 +2,8 @@
 #include "qrcode.h"
 #include <TFT_eSPI.h> 
 #include <SPI.h>
+#include <TJpg_Decoder.h>
+#include "keyes.h"
 
 QRCode qrcode;
 TFT_eSPI tft = TFT_eSPI();  // Invoke library
@@ -19,6 +21,10 @@ void setup() {
     tft.invertDisplay(1);
     tft.setRotation(0);
     tft.fillScreen(TFT_WHITE);
+    tft.setTextColor(TFT_BLACK, TFT_BLACK);
+    TJpgDec.setJpgScale(1);
+    TJpgDec.setSwapBytes(true);
+    TJpgDec.setCallback(tft_output);
 
     // Start time
     uint32_t dt = millis();
@@ -26,8 +32,8 @@ void setup() {
     // Create the QR code
     int version = 5;
     int scale = 6;
-    int shift_x = 5;
-    int shift_y = 5;
+    int shift_x = 8;
+    int shift_y = 8;
     QRCode qrcode;
     uint8_t qrcodeData[qrcode_getBufferSize(version)];
     qrcode_initText(&qrcode, qrcodeData, version, ECC_MEDIUM, "https://www.topigeon.com.tw/");
@@ -46,6 +52,7 @@ void setup() {
                 tft.drawPixel(shift_x+row, shift_y+col, TFT_WHITE);
         }
     }
+    TJpgDec.drawJpg(90,90,keyes_logo, sizeof(keyes_logo));//顯示開機Logo
 }
 
 void loop() {
